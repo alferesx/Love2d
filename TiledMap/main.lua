@@ -18,12 +18,12 @@ function love.update(dt)
 end
 
 function love.draw()
-     -- Translate world so that player is always centred
+     --Ajusta a camera para sempre centralizar no player
      local tx = math.floor(playerScript.x - love.graphics.getWidth() / 2)
      local ty = math.floor(playerScript.y - love.graphics.getHeight() / 2)
-     love.graphics.translate(tx, ty)
+     love.graphics.translate(-tx, -ty)
     
      -- Draw world
-     map:draw(-tx, -ty,1,1)
+     map:draw(-playerScript.x,-playerScript.y,1.5,1.3)
      playerScript.draw();
 end

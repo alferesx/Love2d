@@ -1,6 +1,7 @@
 -- Include Simple Tiled Implementation into project
 local sti = require "sti"
 local playerScript = require "player"
+local colisao
 
 function love.load()
     --Dimensiona a janela do jogo com umas propriedades
@@ -8,10 +9,6 @@ function love.load()
     -- Load map file
     map = sti("mapa.lua")
     playerScript.load();
-    -- Create new dynamic data layer called "Sprites" as the 8th layer
-    local layer = map:addCustomLayer("Sprites", 3)
-
-
 end
 
 function love.update(dt)
@@ -24,7 +21,7 @@ function love.draw()
      -- Translate world so that player is always centred
      local tx = math.floor(playerScript.x - love.graphics.getWidth() / 2)
      local ty = math.floor(playerScript.y - love.graphics.getHeight() / 2)
-     love.graphics.translate(playerScript.x, playerScript.y)
+     love.graphics.translate(tx, ty)
     
      -- Draw world
      map:draw(-tx, -ty,1,1)

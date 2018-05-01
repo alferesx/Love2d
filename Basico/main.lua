@@ -1,13 +1,15 @@
-blocox = 30
-blocoy = 40
 playerScript = require("player")
+blocoScript = require("blocoScript")
 dialogScript = require("dialogScript")
-splashy = require"splashy"
+local bump = require 'bump/bump'
 local sti = require "sti"
 local  animation
 
 function love.load()
-    --Inicia o som
+
+    local world = bump.newWorld()
+
+    --Inicia o som  
     sound = love.audio.newSource("music.ogg", "stream")
     love.audio.play(sound)
     sound:setVolume(0.2)
@@ -16,10 +18,15 @@ function love.load()
     love.window.setMode(900, 1300, {resizable=true, vsync=false, minwidth=400, minheight=300})
     
     --Carrega a imagem do bloco
-    bloco = love.graphics.newImage('bloco.jpg')
+    blocoScript.load()
 
     --Inicia o player
     playerScript.load()
+
+
+playerScript.loadWorld(world);
+blocoScript.loadWorld(world);
+
 
 end
 
@@ -35,8 +42,11 @@ function love.draw()
     playerScript.draw()
 
     -- Desenha o bloco e o blacground
-    love.graphics.draw(bloco,blocox,blocoy,0,0.1,0.1)
-    love.graphics.setBackgroundColor(0,0,0);
+    blocoScript.draw();
+    red=44
+    green=62
+    blue=80
+    love.graphics.setBackgroundColor(red/255,green/255, blue/255);
 end
 
 function love.update(dt)
@@ -44,6 +54,7 @@ function love.update(dt)
     --chama a funcao atualizar do player script e do dialog script
     playerScript.update(dt)
     dialogScript.update(dt)
+    blocoScript.update(dt)
 
     --se apertar t chama o dialog com o texto predefinido
     if love.keyboard.isDown('t') then

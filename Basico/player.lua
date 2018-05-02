@@ -93,8 +93,6 @@ function update(dt)
         marioy = actualY;
         animation_vertical:update(dt) 
          end
-         print(worldPlayer:getRect(A))
-         print(mariox)
 end
 
 

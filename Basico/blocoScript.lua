@@ -10,6 +10,11 @@ function load()
     bloco = love.graphics.newImage('bloco.jpg')
 end
 
+function iniciar(x,y)
+    blocox = x or 30;
+    blocoy = y or 40;
+end
+
 function loadWorld(world)
     worldPlayer=world;
     B = {name="B"}
